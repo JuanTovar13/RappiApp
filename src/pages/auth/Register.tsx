@@ -51,6 +51,9 @@ export  const Register=()=> {
     <div>
       <h1>Register</h1>
 
+      <button onClick={() => navigate("/login")}>
+        Go to Login
+      </button>
       <form onSubmit={handleSubmit}>
         <input
           placeholder="Name"

@@ -65,7 +65,7 @@ console.log("ROLE:", data.role);
     <div>
 
       <h1>Login</h1>
-    <button onClick={()=> navigate("/register")}>Go to Register</button>
+    <button onClick={()=> navigate("/")}>Go to Register</button>
     
 
       <form onSubmit={handleSubmit}>
