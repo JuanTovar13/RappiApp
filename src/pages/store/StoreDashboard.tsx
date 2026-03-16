@@ -1,5 +1,5 @@
 import { useState, useEffect, FormEvent } from "react";
-
+import { useNavigate } from "react-router-dom";
 interface ProductForm {
   name: string;
   price: number;
@@ -17,8 +17,11 @@ export const StoreDashboard = () => {
     price: 0,
   });
 
+
   const [store, setStore] = useState<Store | null>(null);
   const [products, setProducts] = useState<any[]>([]);
+
+    const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user") || "{}");
@@ -103,7 +106,7 @@ const logout = () => {
   localStorage.removeItem("user");
   localStorage.removeItem("role");
 
-  window.location.href = "/login";
+  navigate("/login");
 };
 
   useEffect(() => {
