@@ -106,7 +106,7 @@ const logout = () => {
   localStorage.removeItem("user");
   localStorage.removeItem("role");
 
-  navigate("/login");
+  navigate("/");
 };
 
   useEffect(() => {

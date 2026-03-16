@@ -72,7 +72,7 @@ export const ConsumerStores = () => {
 };
   const logout = () => {
     localStorage.clear();
-    window.location.href = "/login";
+    navigate("/")
   };
 
   useEffect(() => {
