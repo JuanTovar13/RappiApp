@@ -39,6 +39,7 @@ export  const Register=()=> {
 
     // guardar rol localmente
     localStorage.setItem("role", form.role);
+    localStorage.setItem("name", form.name);
 
     navigate("/login");
 

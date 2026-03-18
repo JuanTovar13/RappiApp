@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { Role } from "../auth/Login";
 
 interface Store {
   id: string;
@@ -14,6 +15,15 @@ interface Order {
   status: string;
 }
 
+interface GroupedOrder {
+  order_id: string;
+  status: string;
+  items: {
+    name: string;
+    quantity: number;
+  }[];
+}
+
 export const ConsumerStores = () => {
   const [stores, setStores] = useState<Store[]>([]);
   const [orders, setOrders] = useState<Order[]>([]);
@@ -21,7 +31,9 @@ export const ConsumerStores = () => {
   const navigate = useNavigate();
 
   const token = localStorage.getItem("token");
+  const role: Role = localStorage.getItem("role") as Role;
   const user = JSON.parse(localStorage.getItem("user") || "{}");
+  const name = user?.name;
 
   const getStores = async () => {
     const res = await fetch(
@@ -74,15 +86,41 @@ export const ConsumerStores = () => {
     localStorage.clear();
     navigate("/")
   };
+  
+
+  const groupedOrders: GroupedOrder[] = Object.values(
+  orders.reduce<Record<string, GroupedOrder>>((acc, item) => {
+
+    if (!acc[item.order_id]) {
+      acc[item.order_id] = {
+        order_id: item.order_id,
+        status: item.status,
+        items: [],
+      };
+    }
+
+    acc[item.order_id].items.push({
+      name: item.product_name,
+      quantity: item.quantity,
+    });
+
+    return acc;
+
+  }, {})
+);
 
   useEffect(() => {
     getStores();
     getOrders();
+    console.log("User:", role, user, name);
   }, []);
+
+
+
 
   return (
     <div>
-      <h1>Stores</h1>
+      <h1>List of stores</h1>
       <button onClick={logout}>Logout</button>
 
       {stores.map((store) => (
@@ -98,24 +136,30 @@ export const ConsumerStores = () => {
           </button>
         </div>
       ))}
-      <h2>{user?.name ? `${user.name}'s Orders` : "Your Orders"}</h2>
+      <h2>{name ? `${name}'s Orders` : "Your Orders"}</h2>
 
       {orders.length === 0 && <p>No orders yet</p>}
 
       <ul>
-  {orders.map((order, index) => (
+  {groupedOrders.map((order) => (
 
-    <li key={index}>
-      {order.product_name} x{order.quantity} — {order.status}
+  <div key={order.order_id}>
+    <h3>Order from {user?.name || "Unknown"}</h3>
 
-      <button
-        onClick={() => deleteOrder(order.order_id)}
-      >
-        Delete
-      </button>
-    </li>
+    {order.items.map((item, i) => (
+      <div key={i}>
+        {item.name} x{item.quantity}
+      </div>
+    ))}
 
-  ))}
+    <p>Status: {order.status}</p>
+
+    <button onClick={() => deleteOrder(order.order_id)}>
+      Cancel Order
+    </button>
+  </div>
+
+))}
 </ul>
     </div>
   );

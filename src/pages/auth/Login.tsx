@@ -1,7 +1,7 @@
 import { useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 
-type Role = "consumer" | "store" | "delivery";
+export type Role = "consumer" | "store" | "delivery";
 
 export const Login = () => {
   const navigate = useNavigate();
@@ -31,8 +31,8 @@ export const Login = () => {
 
       console.log("LOGIN RESPONSE:", data);
 
-const token = data.session?.access_token;
-      const role: Role = data.role;
+      const token = data.session?.access_token;
+      const role: Role = data.user.role;
 
       if (!token) {
         console.error("No token received");
@@ -42,10 +42,11 @@ const token = data.session?.access_token;
 
 
       localStorage.setItem("token", token);
-      localStorage.setItem("role", role);
+      localStorage.setItem("role", data.user.role);
       localStorage.setItem("user", JSON.stringify(data.user));
+      localStorage.setItem("name", data.user.name);
       
-console.log("ROLE:", data.role);
+console.log("ROLE:", data.user.role, "USER:", data.user, "NAME:", data.user.name);
       
     
 

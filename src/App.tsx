@@ -6,6 +6,7 @@ import {ConsumerStores} from "./pages/consumer/ConsumerStores";
 import {StoreDashboard} from "./pages/store/StoreDashboard";
 import {DeliveryDashboard} from "./pages/delivery/DeliveryDashboard";
 import { StoreProducts } from "./pages/consumer/StoreProducts";
+import { OrderDetails } from "./pages/delivery/OrderDetails";
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
 
         <Route path="/store" element={<StoreDashboard />} />
         <Route path="/delivery" element={<DeliveryDashboard />} />
+        <Route path="/delivery/orders/:id" element={<OrderDetails />} />
 
       </Routes>
 

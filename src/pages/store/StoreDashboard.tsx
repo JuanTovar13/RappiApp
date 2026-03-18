@@ -8,7 +8,14 @@ interface ProductForm {
 interface Store {
   id: string;
   name: string;
+  user_id: string;
   is_open: boolean;
+}
+
+interface Product {
+  id: string;
+  name: string;
+  price: number;
 }
 
 export const StoreDashboard = () => {
@@ -19,7 +26,7 @@ export const StoreDashboard = () => {
 
 
   const [store, setStore] = useState<Store | null>(null);
-  const [products, setProducts] = useState<any[]>([]);
+  const [products, setProducts] = useState<Product[]>([]);
 
     const navigate = useNavigate();
 
@@ -40,7 +47,7 @@ export const StoreDashboard = () => {
     const data = await res.json();
 
     const myStore = data.find(
-      (s: any) => s.user_id === user.id
+      (store: Store) => store.user_id === user.id
     );
 
     setStore(myStore);
@@ -84,10 +91,10 @@ export const StoreDashboard = () => {
   const toggleStore = async () => {
   if (!store) return;
 
-  const endpoint = store.is_open ? "close" : "open";
+  const isOpen = store.is_open ? "close" : "open";
 
   await fetch(
-    `https://rappibackend.vercel.app/stores/${store.id}/${endpoint}`,
+    `https://rappibackend.vercel.app/stores/${store.id}/${isOpen}`,
     {
       method: "PATCH",
       headers: {
@@ -102,9 +109,7 @@ export const StoreDashboard = () => {
   });
 };
 const logout = () => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("user");
-  localStorage.removeItem("role");
+  localStorage.clear();
 
   navigate("/");
 };
