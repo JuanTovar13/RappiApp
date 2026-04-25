@@ -14,7 +14,7 @@ export const Login = () => {
 
     try {
       const res = await fetch(
-        "https://rappibackend.vercel.app/auth/login",
+        "https://rappibackend.vercel.app/api/auth/login",
         {
           method: "POST",
           headers: {

@@ -1,5 +1,5 @@
 import { useState, ReactNode } from "react";
-import { AuthContext } from "./AuthContext";
+import { AuthContext } from "../auth/AuthContext";
 import { UserRole } from "../types/auth";
 
 interface AuthProviderProps {

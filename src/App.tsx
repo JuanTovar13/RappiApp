@@ -8,9 +8,10 @@ import {DeliveryDashboard} from "./pages/delivery/DeliveryDashboard";
 import { StoreProducts } from "./pages/consumer/StoreProducts";
 import { OrderDetails } from "./pages/delivery/OrderDetails";
 
+
 function App() {
   return (
-    
+
       <Routes>
 
         <Route path="/login" element={<Login />} />
@@ -25,6 +26,7 @@ function App() {
         <Route path="/store" element={<StoreDashboard />} />
         <Route path="/delivery" element={<DeliveryDashboard />} />
         <Route path="/delivery/orders/:id" element={<OrderDetails />} />
+
 
       </Routes>
 

@@ -1,0 +1,11 @@
+.consumer-page { min-height: 100vh; }
+.consumer-header { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; }
+.consumer-body { max-width: 640px; margin: 0 auto; padding: 24px 20px; }
+.store-list { display: flex; flex-direction: column; gap: 8px; }
+.store-card { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; }
+.order-list { display: flex; flex-direction: column; gap: 12px; }
+.order-card { display: flex; flex-direction: column; gap: 8px; padding: 14px 16px; }
+.order-items { display: flex; flex-direction: column; gap: 4px; }
+.order-card-header { display: flex; align-items: center; justify-content: space-between; }
+.tracking-map-wrap { overflow: hidden; }
+.tracking-map-label { padding: 8px 12px; }

@@ -24,7 +24,7 @@ export  const Register=()=> {
     e.preventDefault();
 
     try {
-      await fetch("https://rappibackend.vercel.app/auth/register", {
+      await fetch("https://rappibackend.vercel.app/api/auth/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

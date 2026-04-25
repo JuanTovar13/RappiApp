@@ -1,18 +1,11 @@
-export type UserRole = "consumer" | "store" | "delivery";
-
-export interface AuthResponse {
-  token: string;
-  role: UserRole;
+export enum UserRole {
+  CONSUMER = 'consumer',
+  STORE    = 'store',
+  DELIVERY = 'delivery',
 }
 
-export interface RegisterRequest {
-  name: string;
-  email: string;
-  password: string;
-  role: UserRole;
-}
-
-export interface LoginRequest {
-  email: string;
-  password: string;
+export enum OrderStatus {
+  CREATED     = 'Creado',
+  IN_DELIVERY = 'En entrega',
+  DELIVERED   = 'Entregado',
 }
